@@ -132,6 +132,8 @@ public class Filtered_File_Ecryption_SetUp {
 
                          ///COcept of error usig commas ,,,
     {
+        if(Files.size(Path.of(p))<=10000000)
+        {
                 
         File f=new File(p);
         
@@ -143,15 +145,17 @@ public class Filtered_File_Ecryption_SetUp {
           // ff.write();
         File ff=new File(p+"_Encrypted.txt");
         ff.setWritable(true);
+       
         /* Data will e lost on same file */
         
-        FileOutputStream fos=new FileOutputStream(f);
+        FileOutputStream fos=new FileOutputStream(ff);
         FileChannel ps;
         fos.write(enc.encode(fis.readAllBytes()));
         fis.close();
         fos.close();
-        
-        
+        Files.lines(ff.toPath()).forEach(hh->System.out.println(hh));
+        Files.delete(Path.of(p));
+        }
               //  enc.encodeToString(src)
     }
 }
